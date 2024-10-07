@@ -5,38 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" , initial-scale="1.0">
     <title>My CMP v3 Testpage</title>   
-    
 <script>
-window.UC_UI_USER_SESSION_DATA = 
-    {"consents":
-    [
-        {
-            "status": false,
-            "templateId": "HkocEodjb7",
-            "timestamp": 1727444659000
-        },
-        {
-            "status": false,
-            "templateId": "BJ59EidsWQ",
-            "timestamp": 1727444663000
-        },
-        {
-            "status": true,
-            "templateId": "H1Vl5NidjWX",
-            "timestamp": 1727444663000
-        }
-    ],
-    "controllerId": "b734efe7b903bb2693a810e2b1fd00ac37b40bcbdba6028108eb6d9204a820a4",
-    "language": "en",
-    "tcf": null,
-    "ccpa": {
-        "timestamp": 1727782379635,
-        "ccpaString": "1YN-"
-      }
-}
+    window.addEventListener("onUcImprintClick", function(e){
+      console.log("Insert here your logic for Imprint")
+    })
+
+    window.addEventListener("onUcPrivacyClick", function(e) {
+      console.log("Insert here your logic for Privacy Policy")
+    })
 </script>
+
     
-    <script id="usercentrics-cmp" src="https://web.cmp.usercentrics-sandbox.eu/ui/pr/603/loader.js" data-settings-id="apqx5Fsa6IPx-U" async></script>
+    <script id="usercentrics-cmp" src="https://web.cmp.usercentrics.eu/ui/loader.js" data-settings-id="59ALCK1up-Knfu" async></script>
+    
 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/bTiu9nfgGys??autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     
