@@ -19,6 +19,34 @@ window.UC_UI.areAllConsentsAccepted()); </script>
 
 <script id="usercentrics-cmp" data-settings-id="QPV5HAJxq" src="https://web.cmp.usercentrics-sandbox.eu/ui/pr/827/loader.js"></script>
 
+ <script> const callback = (tcData, success) => {
+
+  if(success && tcData.eventStatus === 'tcloaded') {
+
+    // do something with tcData.tcString
+
+    // remove the ourself to not get called more than once
+    __tcfapi('removeEventListener', 2, (success) => {
+
+      if(success) {
+
+        // oh good...
+
+      }
+
+    }, tcData.listenerId);
+
+
+  } else {
+
+    // do something else
+
+  }
+
+}
+
+__tcfapi('addEventListener', 2, callback);</script> 
+
 
     <h2>Usercentrics CMP Test Page</h2>
      <br><br>
