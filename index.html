@@ -13,27 +13,59 @@ window.addEventListener("onUcImprintClick", function(e){
 });
   </script> 
 
-<script>
-    const callback = (tcData, success) => {
-      if (success && tcData.eventStatus === 'tcloaded') {
+    <script>
+        __tcfapi('addEventListener', 2, function(tcData,success){
+  if(success && tcData.eventStatus === 'cmpuishown') {
+      console.log(' TCF cmpuishown Event');   
 
-        // Do something with tcData.tcString
-        console.log('TC String:', tcData.tcString);
+      
+    window.dataLayer = window.dataLayer.map(function(ele) {
+if (ele.event === 'consent_status') {
 
-        // Remove the listener to avoid being called more than once
-        __tcfapi('removeEventListener', 2, (removeSuccess) => {
-          if (removeSuccess) {
-            console.log('Event listener removed successfully.');
-          }
-        }, tcData.listenerId);
+  
+  ele.tcfEventStatus='cmpuishown';
+  ele.tcf=false;
+  return ele;
+}
+return ele;
+}) 
 
-      } else {
-        console.log('Event status not loaded or callback not successful.');
-      }
-    };
+  }
+  else if(success && tcData.eventStatus === 'useractioncomplete') {
+      console.log('TCF useractioncomplete Event');
+   
 
-    __tcfapi('addEventListener', 2, callback);
-  </script>
+
+  window.dataLayer = window.dataLayer.map(function(ele) {
+    if (ele.event === 'consent_status') {
+      ele.tcfEventStatus='useractioncomplete';
+      ele.tcf=true;
+      ele.tcString=tcData.tcString;
+      return ele;
+    }
+    return ele;
+  })
+
+
+
+  }
+  else if(success && tcData.eventStatus === 'tcloaded'){
+      console.log('TCF tcloaded Event');
+
+  window.dataLayer = window.dataLayer.map(function(ele){
+    if (ele.event === 'consent_status') {
+      ele.tcfEventStatus='tcloaded';
+      ele.tcf=true;
+      ele.tcString=tcData.tcString;
+      return ele;
+    }
+    return ele;
+  })
+
+  }
+ 
+});
+    </script>
 
 
 <script id="usercentrics-cmp" data-settings-id="QPV5HAJxq" src="https://web.cmp.usercentrics-sandbox.eu/ui/pr/827/loader.js"></script>
