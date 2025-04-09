@@ -6,70 +6,64 @@
     <meta name="viewport" content="width=device-width" , initial-scale="1.0">
     <title>CMP Test</title>   
  <br><br>
-
-
-<script id="usercentrics-cmp" data-settings-id="QPV5HAJxq" src="https://web.cmp.usercentrics-sandbox.eu/ui/pr/827/loader.js"></script>
-
-
- <script>
-window.addEventListener("onUcImprintClick", function(e){
-  console.log("Custom Imprint Link Clicked!!")
-});
-  </script> 
-
-    <script>
-        __tcfapi('addEventListener', 2, function(tcData,success){
-  if(success && tcData.eventStatus === 'cmpuishown') {
-      console.log(' TCF cmpuishown Event');   
-
-      
-    window.dataLayer = window.dataLayer.map(function(ele) {
-if (ele.event === 'consent_status') {
-
+<!-- Usercentrics CMP loader -->
+  <script id="usercentrics-cmp" data-settings-id="QPV5HAJxq" src="https://web.cmp.usercentrics-sandbox.eu/ui/pr/827/loader.js"></script>
   
-  ele.tcfEventStatus='cmpuishown';
-  ele.tcf=false;
-  return ele;
-}
-return ele;
-}) 
+  <!-- Optional: initialize a dummy dataLayer if not using GTM -->
+  <script>
+    window.dataLayer = window.dataLayer || [
+      { event: 'consent_status' } // example entry to be modified
+    ];
+  </script>
 
-  }
-  else if(success && tcData.eventStatus === 'useractioncomplete') {
-      console.log('TCF useractioncomplete Event');
-   
+  <!--  __tcfapi listener -->
+  <script>
+    (function waitForTCF() {
+      if (typeof __tcfapi !== 'function') {
+        setTimeout(waitForTCF, 50);
+        return;
+      }
 
-
-  window.dataLayer = window.dataLayer.map(function(ele) {
-    if (ele.event === 'consent_status') {
-      ele.tcfEventStatus='useractioncomplete';
-      ele.tcf=true;
-      ele.tcString=tcData.tcString;
-      return ele;
-    }
-    return ele;
-  })
-
-
-
-  }
-  else if(success && tcData.eventStatus === 'tcloaded'){
-      console.log('TCF tcloaded Event');
-
-  window.dataLayer = window.dataLayer.map(function(ele){
-    if (ele.event === 'consent_status') {
-      ele.tcfEventStatus='tcloaded';
-      ele.tcf=true;
-      ele.tcString=tcData.tcString;
-      return ele;
-    }
-    return ele;
-  })
-
-  }
- 
-});
-    </script>
+      __tcfapi('addEventListener', 2, function(tcData, success) {
+        if (success && tcData.eventStatus === 'cmpuishown') {
+          console.log('TCF cmpuishown Event');
+          if (Array.isArray(window.dataLayer)) {
+            window.dataLayer = window.dataLayer.map(function(ele) {
+              if (ele.event === 'consent_status') {
+                ele.tcfEventStatus = 'cmpuishown';
+                ele.tcf = false;
+              }
+              return ele;
+            });
+          }
+        } else if (success && tcData.eventStatus === 'useractioncomplete') {
+          console.log('TCF useractioncomplete Event');
+          if (Array.isArray(window.dataLayer)) {
+            window.dataLayer = window.dataLayer.map(function(ele) {
+              if (ele.event === 'consent_status') {
+                ele.tcfEventStatus = 'useractioncomplete';
+                ele.tcf = true;
+                ele.tcString = tcData.tcString;
+              }
+              return ele;
+            });
+          }
+        } else if (success && tcData.eventStatus === 'tcloaded') {
+          console.log('TCF tcloaded Event');
+          if (Array.isArray(window.dataLayer)) {
+            window.dataLayer = window.dataLayer.map(function(ele) {
+              if (ele.event === 'consent_status') {
+                ele.tcfEventStatus = 'tcloaded';
+                ele.tcf = true;
+                ele.tcString = tcData.tcString;
+              }
+              return ele;
+            });
+          }
+        }
+      });
+    })();
+  </script>
 
     <h2>Usercentrics CMP Test Page</h2>
      <br><br>
