@@ -21,7 +21,7 @@
 
       __tcfapi('addEventListener', 2, function(tcData, success) {
         if (success && tcData.eventStatus === 'cmpuishown') {
-          console.log('TCF cmpuishown Event', tcData));
+          console.log('TCF cmpuishown Event', tcData);
           if (Array.isArray(window.dataLayer)) {
             window.dataLayer = window.dataLayer.map(function(ele) {
               if (ele.event === 'consent_status') {
@@ -44,7 +44,7 @@
             });
           }
         } else if (success && tcData.eventStatus === 'tcloaded') {
-          console.log('TCF tcloaded Event', tcData));
+          console.log('TCF tcloaded Event', tcData);
           if (Array.isArray(window.dataLayer)) {
             window.dataLayer = window.dataLayer.map(function(ele) {
               if (ele.event === 'consent_status') {
